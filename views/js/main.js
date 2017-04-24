@@ -531,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.className = 'mover';
     elem.src = "images/pizzabg.png";
     elem.basicLeft = (i % cols) * s;
-    elem.style.left = this.basicLeft;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
