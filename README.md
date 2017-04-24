@@ -18,9 +18,9 @@
 
 
 #### UpdatePositions Optimisations
-1.) Remove calculation for Maths.sin (only needed once) outside of the loop for updatePositions().
+1.) Remove calculation for Maths.sin (only needed once) outside of the loop for updatePositions().<br>
 2.) Change items to get elements by class name instead of querying all.
 
 #### DOMContentLoaded Optimisations
-1.) Create new image with height 100px and width 77px.
+1.) Create new image with height 100px and width 77px.<br>
 2.) Remove style.height and style.width as image size changed and additional resizing not needed.
