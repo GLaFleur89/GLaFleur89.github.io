@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizzabg.png";
-    elem.basicLeft = (i % cols) * s;
+    elem.basicLeft = (i % 8) * 256;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
