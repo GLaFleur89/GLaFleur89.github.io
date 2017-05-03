@@ -503,9 +503,10 @@ var items = document.getElementsByClassName('mover'); // removed from function t
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  
+
   var topCalc = document.body.scrollTop / 1250;
-  for (var i = 0; i < items.length; i++) {
+  var itemLength = items.length;
+  for (var i = 0; i < itemLength; i++) {
     var phase = Math.sin(topCalc + (i % 5));
     var xpos = items[i].basicLeft + 100 * phase + 'px';
     items[i].style.transform = "translateX("+ xpos + ") translateZ(0)";
@@ -534,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizzabg.png";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
