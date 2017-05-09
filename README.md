@@ -3,7 +3,7 @@
 ### Index.html Optimisations
 1.) Reduced image size and quality of pizzeria.jpg to the max size needed i.e actual size viewed.<br>
 2.) Enabled compression<br>
-3.) Replaced images with optimised images.
+3.) Replaced images with optimised images.<br>
 4.) Replaced google fonts with font loader to allow fonts script to load asynchronous. 
 
 ### Main.js Optimisations
