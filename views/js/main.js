@@ -523,7 +523,10 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+// Changed to requestAnimationFrame to reduce paint time and improve animation
+window.addEventListener('scroll', function() {
+  window.requestAnimationFrame(updatePositions);
+});
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
