@@ -18,9 +18,14 @@
 
 
 #### UpdatePositions Optimisations
-1.) Remove calculation for Maths.sin (only needed once) outside of the loop for updatePositions().<br>
-2.) Change items to get elements by class name instead of querying all.
+1.) Change items to get elements by class name instead of querying all.<br>
+2.) Remove calculation for items.lemgth (only needed once) outside of the loop for updatePositions().<br>
+3.) Remove calculation using scrollTop outside of loop. <br>
+4.) Changed style.left to transform by translateX and translateZ(0).<br>
+5.) UpdatePositions no longer runs on scroll but requestAnimationFrame now runs with each scroll with UpdatePositions as the functions input.
 
 #### DOMContentLoaded Optimisations
 1.) Create new image with height 100px and width 77px.<br>
-2.) Remove style.height and style.width as image size changed and additional resizing not needed.
+2.) Remove style.height and style.width as image size changed and additional resizing not needed.<br>
+3.) changed no. of pizzas to 50.
+
