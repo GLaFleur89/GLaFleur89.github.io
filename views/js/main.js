@@ -449,11 +449,12 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var pizzaLength = document.getElementsByClassName("randomPizzaContainer").length;
-    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
-    var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+    var pizza = document.getElementsByClassName("randomPizzaContainer");
+    var pizzaLength = pizza.length;
+    var dx = determineDx(pizza[0], size);
+    var newwidth = (pizza[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < pizzaLength; i++) {
-      document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
+      pizza[i].style.width = newwidth;
     }
   }
 
@@ -469,9 +470,9 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
+    pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
@@ -517,7 +518,7 @@ function updatePositions() {
 
   for (var i = 0; i < itemLength; i++) {
     phase = PhaseArray[i % 5] ;
-    items[i].style.transform = "translateX("+ (350 * phase) + "px)";
+    items[i].style.transform = "translateX("+ (100 * phase) + "px)";
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -544,11 +545,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizzabg.png";
-<<<<<<< HEAD
-    elem.style.Left = (i % cols) * s + 'px';
-=======
+    elem.style.left = (i % cols) * s + 'px';
     elem.basicLeft = (i % 8) * 256;
->>>>>>> origin/master
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
