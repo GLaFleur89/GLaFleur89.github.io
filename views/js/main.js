@@ -509,8 +509,7 @@ function updatePositions() {
   var itemLength = items.length;
   for (var i = 0; i < itemLength; i++) {
     var phase = Math.sin(topCalc + (i % 5));
-    var xpos = -items[i].basicLeft + 1440 * phase + 'px';
-    items[i].style.transform = "translateX("+ xpos + ") translateZ(0)";
+    items[i].style.transform = "translateX("+ (350 * phase) + "px)";
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -533,11 +532,11 @@ window.addEventListener('scroll', function() {
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 35; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizzabg.png";
-    elem.basicLeft = (i % cols) * s ;
+    elem.style.Left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
