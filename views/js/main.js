@@ -507,8 +507,16 @@ function updatePositions() {
 
   var topCalc = document.body.scrollTop / 1250;
   var itemLength = items.length;
+
+  // Phase has five values that are repeated so dont need to run on every scroll.
+  // Create Array for five values and use array in loop for scroll.
+  var PhaseArray = [];
+  for (var i = 0; i < 5 ; i++) {
+    PhaseArray.push(Math.sin(topCalc + i));
+  }
+
   for (var i = 0; i < itemLength; i++) {
-    var phase = Math.sin(topCalc + (i % 5));
+    phase = PhaseArray[i % 5] ;
     items[i].style.transform = "translateX("+ (350 * phase) + "px)";
   }
 
