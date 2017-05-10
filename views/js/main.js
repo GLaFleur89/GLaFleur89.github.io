@@ -544,7 +544,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizzabg.png";
+<<<<<<< HEAD
     elem.style.Left = (i % cols) * s + 'px';
+=======
+    elem.basicLeft = (i % 8) * 256;
+>>>>>>> origin/master
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
