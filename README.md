@@ -20,7 +20,8 @@ NB! Pagescore for mobile now 96/100 and desktop 94/100. Used web address: Silver
 2.) Remove calculation for items.length (only needed once) outside of the loop for updatePositions().<br>
 3.) Remove calculation using scrollTop outside of loop. <br>
 4.) Changed style.left to transform by translateX.<br>
-5.) UpdatePositions no longer runs on scroll but requestAnimationFrame now runs with each scroll with UpdatePositions as the functions input.
+5.) UpdatePositions no longer runs on scroll but requestAnimationFrame now runs with each scroll with UpdatePositions as the functions input.<br>
+6.) Phase removed from loop due to same 5 numbers being calculated and given own loop to determine five numbers. 
 
 #### DOMContentLoaded Optimisations
 1.) Create new image with height 100px and width 77px.<br>
