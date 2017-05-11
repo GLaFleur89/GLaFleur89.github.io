@@ -1,0 +1,54 @@
+h1 {
+  font-family: "Cinzel", serif;
+}
+
+h1:first-of-type {
+  margin-top: 8%;
+}
+
+h2 {
+  text-decoration: underline;
+  font-family: "Gruppo", cursive;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+h3,h4 {
+  font-family: "Poiret One", cursive;
+}
+
+figcaption {
+  text-align: center;
+}
+
+.logo .fa {
+  font-size: 7em;
+  margin: 5%;
+  text-shadow: 4px 2px 2px #a9a9a9;
+}
+
+hr {
+  margin-top: 0%;
+}
+
+@media screen and (max-width: 500px) {
+  .logo {
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+  }
+  .name-head {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+@media screen and (min-width: 501px) and (max-width: 991px) {
+  .logo {
+    width: 20%;
+    margin-top: 2%;
+  }
+  .name-head {
+    width: 80%;
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cinzel|Gruppo|Poiret+One" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <header>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6 logo">
+                <i class="fa fa-universal-access"></i>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6 text-right text-uppercase name-head">
+                <h1>Grant La Fleur</h1>
+                <h3>King of Front-end</h3>
+              </div>
+            </div>
+          </header>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <picture class="images">
+            <source media="(max-width: 600px)" srcset="./images/tree-600.jpg 1x,./images/tree-1200.jpg 2x ">
+            <source media="(min-width: 601px) and (max-width: 991px)" srcset="./images/tree-cropped-800.jpg">
+            <source media="(min-width: 992px)" srcset="./images/tree-cropped-1200.jpg 1x,./images/tree-cropped-2400.jpg 2x">
+            <img class="img-responsive"
+                 src="./images/tree-1200.jpg"
+                 alt="Lone Tree">
+          </picture>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Featured Work</h2>
+        </div>
+      </div>
+      <div class="row">
+
+        <article class="col-md-6">
+          <picture class="images">
+            <source media="(max-width: 600px)" srcset="./images/code-600.jpg 1x,./images/code-1200.jpg 2x">
+            <source media="(min-width: 601px) and (max-width: 991px)" srcset="./images/crop/code-800x300.jpg">
+            <source media="(min-width: 992px)" srcset="./images/code-1200.jpg 1x,./images/code-2400.jpg 2x">
+            <img class="img-responsive" src="./images/code-1200.jpg" data-toggle="modal" data-target="#project1"
+            alt="code">
+          </picture>
+          <h3>Project 1</h3>
+          <p><a href="http://github.com/" target="_blank">More about Project 1</a></p>
+        </article>
+
+        <article class="col-md-6">
+          <picture class="images">
+            <source media="(max-width: 600px)" srcset="./images/html-600.jpg 1x,./images/html-1200.jpg 2x">
+            <source media="(min-width: 601px) and (max-width: 991px)" srcset="./images/crop/html-800x300.jpg">
+            <source media="(min-width: 992px)" srcset="./images/html-1200.jpg 1x,./images/html-2400.jpg 2x">
+            <img class="img-responsive" src="./images/html-1200.jpg" data-toggle="modal" data-target="#project2"
+            alt="html on screen">
+          </picture>
+          <h3>Project 2</h3>
+          <p><a href="http://github.com/" target="_blank">More about Project 2</a></p>
+        </article>
+
+      </div>
+      <div class="row">
+
+        <article class="col-md-6">
+          <picture class="images">
+            <source media="(max-width: 600px)" srcset="./images/pc-600.jpg 1x,./images/pc-1200.jpg 2x">
+            <source media="(min-width: 601px) and (max-width: 991px)" srcset="./images/crop/pc-800x300.jpg">
+            <source media="(min-width: 992px)" srcset="./images/pc-1200.jpg 1x,./images/pc-2400.jpg 2x">
+            <img class="img-responsive" src="./images/pc-1200.jpg" data-toggle="modal" data-target="#project3"
+            alt="Different Devices">
+          </picture>
+          <h3>Project 3</h3>
+          <p><a href="http://github.com/" target="_blank">More about Project 3</a></p>
+        </article>
+
+        <article class="col-md-6">
+          <picture class="images">
+            <source media="(max-width: 600px)" srcset="./images/binary-600.jpg 1x,./images/binary-1200.jpg 2x">
+            <source media="(min-width: 601px) and (max-width: 991px)" srcset="./images/crop/binary-800x300.jpg">
+            <source media="(min-width: 992px)" srcset="./images/binary-1200.jpg 1x,./images/binary-2400.jpg 2x">
+            <img class="img-responsive" src="./images/binary-1200.jpg" data-toggle="modal" data-target="#project4"
+            alt="binary digits">
+          </picture>
+          <h3>Project 4</h3>
+          <p><a href="http://github.com/" target="_blank">More about Project 4</a></p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="modal1-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal1-label">Favorite App Page</h4>
+                </div>
+                <figure class="modal-body">
+                    <img class="img-responsive" src="./images/modal/site1.png">
+                    <figcaption>This was my first project in this class. I learned a lot about HTML and CSS.</figcaption>
+                </figure>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="project2" tabindex="-1" role="dialog" aria-labelledby="modal2-label" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="modal2-label">Second App Page</h4>
+              </div>
+              <figure class="modal-body">
+                  <img class="img-responsive" src="./images/modal/site2.png">
+                  <figcaption>Dont judge I am still a developer in training.</figcaption>
+              </figure>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="project3" tabindex="-1" role="dialog" aria-labelledby="modal3-label" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="modal3-label">Third App Page</h4>
+              </div>
+              <figure class="modal-body">
+                  <img class="img-responsive" src="./images/modal/site3.png">
+                  <figcaption>I'm getting there so keep watching this space.</figcaption>
+              </figure>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="project4" tabindex="-1" role="dialog" aria-labelledby="modal4-label" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" id="modal4-label">Fourth App Page</h4>
+              </div>
+              <figure class="modal-body">
+                  <img class="img-responsive" src="./images/modal/site4.png">
+                  <figcaption>Learning new things one step at a time.</figcaption>
+              </figure>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+</body>
+</html>
