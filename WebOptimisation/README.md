@@ -1,7 +1,7 @@
 ## Website Performance Optimization portfolio project
 
 ### Running Instructions
-Open Index.html in browser. or use the address bar in your browser to go to SilverAceLegend.github.io.
+Open Index.html in browser. or use the address bar in your browser to go to SilverAceLegend.github.io/WebOptimisation.
 
 ### Index.html Optimisations
 1.) Reduced image size and quality of pizzeria.jpg to the max size needed i.e actual size viewed.<br>
@@ -9,7 +9,7 @@ Open Index.html in browser. or use the address bar in your browser to go to Silv
 3.) Replaced images with optimised images.<br>
 4.) Replaced google fonts with font loader to allow fonts script to load asynchronous.
 
-NB! Pagescore for mobile now 96/100 and desktop 94/100. Used web address: SilverAceLegend.github.io.
+NB! Pagescore for mobile now 96/100 and desktop 94/100. Used web address: SilverAceLegend.github.io/WebOptimisation.
 
 ### Main.js Optimisations
 #### Pizza Slider Optimisations
