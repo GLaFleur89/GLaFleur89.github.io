@@ -6,10 +6,16 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type='text/javascript' src='knockout-3.4.2.js'></script>
     <script src="jss/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPeoFs5eZwnLZs8MlDYb6Ys_LT9MAJt4I&libraries=places&callback=initMap"
+    async defer></script>
     <title>Neighbourhood Map</title>
   </head>
   <body>
-    <div class="map"></div>
+    <div class="place-input">
+      <input type="text" name="home" id="home" placeholder="Enter base location here">
+      <button type="button" id="homebutton">Submit</button>
+    </div>
+    <div id="map"></div>
     <div class="map-sidebar"></div>
   </body>
 </html>
