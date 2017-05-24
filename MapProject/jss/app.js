@@ -1,3 +1,4 @@
+var markerslist = [];
 var map;
       function initMap() {
         var input = document.getElementById("home");
@@ -62,6 +63,7 @@ function createMarkers(places) {
   console.log(places.length);
   for (var i = 1; i < 6; i++) {
     var place = places[i];
+    markerslist.push(place);
     var icon = {
       url: place.icon,
       size: new google.maps.Size(35, 35),
@@ -84,9 +86,12 @@ function createMarkers(places) {
     markers.push(marker);
   }
     labelindex=0;
+    console.log(markerslist);
 }
 
-var myViewModel = function(markers) {
-    this.markerslist = ko.observableArray(markers);
+var myViewModel = function() {
+    this.list = ko.observableArray(markerslist);
 
 }
+
+ko.applyBindings(new myViewModel());
