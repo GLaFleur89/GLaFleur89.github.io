@@ -85,3 +85,8 @@ function createMarkers(places) {
   }
     labelindex=0;
 }
+
+var myViewModel = function(markers) {
+    this.markerslist = ko.observableArray(markers);
+
+}
