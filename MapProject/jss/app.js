@@ -31,11 +31,26 @@ var map;
       }
       })};
 
+  var markers = [];
+  var labels="123456789";
+  var labelindex = 0;
 
-
-var markers = [];
-var labels="123456789";
-var labelindex = 0;
+  function searchplaces(base) {
+    hidemarkers(markers);
+    var bounds = map.getBounds();
+    var places = new google.maps.places.PlacesService(map);
+    places.nearbySearch({
+      location: base,
+      radius: 1000,
+      keyword: ''
+    }, function(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        createMarkers(results);
+        if (places.length < 5) {
+          window.alert("Less than five points of interest found");
+        }
+      }});
+  };
 
 function hidemarkers(marker) {
   for (i=0; i<marker.length; i++) {
@@ -67,25 +82,6 @@ function createMarkers(places) {
     getPlacesDetails(this, place);
     });
     markers.push(marker);
-
   }
-  labelindex=0;
-
+    labelindex=0;
 }
-
-function searchplaces(base) {
-  hidemarkers(markers);
-  var bounds = map.getBounds();
-  var places = new google.maps.places.PlacesService(map);
-  places.nearbySearch({
-    location: base,
-    radius: 1000,
-    keyword: ''
-  }, function(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      createMarkers(results);
-      if (places.length < 5) {
-        window.alert("Less than five points of interest found");
-      }
-    }});
-};
