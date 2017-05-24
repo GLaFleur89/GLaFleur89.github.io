@@ -16,6 +16,10 @@
       <button type="button" id="homebutton">Submit</button>
     </div>
     <div id="map"></div>
-    <div class="map-sidebar"></div>
+    <div class="map-sidebar">
+      <ul class=markerlist data-bind="foreach: markers">
+        <li data-bind="text: title"></li>
+      </ul>
+    </div>
   </body>
 </html>
