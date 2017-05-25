@@ -46,8 +46,7 @@ var myViewModel = function() {
     var places = new google.maps.places.PlacesService(map);
     places.nearbySearch({
       location: base,
-      radius: 1000,
-      keyword: ''
+      radius: 500
     }, function(results, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         createMarkers(results);
