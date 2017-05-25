@@ -5,6 +5,7 @@ function initMap() {
 
 var myViewModel = function() {
   this.markerslist = ko.observableArray();
+  this.headingList = ko.observable(false);
   var self = this;
   var map;
   var markers = [];
@@ -18,6 +19,7 @@ var myViewModel = function() {
       alert("No location selected!");
     } else {
       self.markerslist.removeAll();
+      self.headingList(true);
       geocodeAddress(geocoder);
 
       }

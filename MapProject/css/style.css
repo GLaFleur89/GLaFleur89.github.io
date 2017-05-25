@@ -4,12 +4,12 @@ html, body {
 }
 
 .place-input {
-  height: 5%;
+  height: 3.5%;
   width: 20%;
   margin-left: auto;
   margin-right: auto;
 }
 
 #map {
-  height: 80%;
+  height: 75%;
 }
