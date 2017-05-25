@@ -93,4 +93,8 @@ var myViewModel = function() {
       labelindex=0;
   }
 
+  function filter() {
+    var input = document.getElementById("home").value
+  }
+
 }

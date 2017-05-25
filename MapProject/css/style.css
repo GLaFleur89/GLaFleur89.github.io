@@ -13,3 +13,12 @@ html, body {
 #map {
   height: 75%;
 }
+
+.list {
+  float: left;
+}
+
+.filter {
+  float:left;
+  margin-left: 5%;
+}
