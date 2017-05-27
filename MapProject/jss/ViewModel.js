@@ -89,6 +89,7 @@ var myViewModel = function() {
         title: place.name,
         position: place.geometry.location,
         id: place.id,
+        animation: google.maps.Animation.DROP,
         label: labels[labelindex++]
       });
       // If a marker is clicked, do a place details search on it in the next function.
