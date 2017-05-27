@@ -96,14 +96,18 @@ var myViewModel = function() {
       });
       // If a marker is clicked, do a place details search on it in the next function.
       marker.addListener('click', function(holder) {
-                  return function() {
-                    if (holder.getAnimation() !== null) {
-                  holder.setAnimation(null);
-                } else {
-                  holder.setAnimation(google.maps.Animation.BOUNCE);
-                }
-          }
-        }(marker));
+
+                self.animateicons(this);}
+
+//                  return function() {
+//                    if (holder.getAnimation() !== null) {
+//                  holder.setAnimation(null);
+//                } else {
+//                  holder.setAnimation(google.maps.Animation.BOUNCE);
+//                }
+//          }
+//        }(marker)
+);
 
       markers.push(marker);
     }
@@ -127,10 +131,17 @@ this.filter = function () {
   };
 };
 
+function toggleAnimation() {
+  if(markers[i].getAnimation() !== null) {
+    markers[i].setAnimation(null);} else {
+      markers[i].setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
 this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
-          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+          toggleAnimation();
         } else {markers[i].setAnimation(null);
       }
 }};
