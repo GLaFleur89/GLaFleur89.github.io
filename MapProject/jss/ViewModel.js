@@ -22,6 +22,7 @@ var myViewModel = function() {
       alert("No location selected!");
     } else {
       self.markerslist.removeAll();
+      self.filterlist.removeAll();
       self.headingList(true);
       geocodeAddress(geocoder);
       }
