@@ -66,11 +66,11 @@ var myViewModel = function() {
   function createMarkers(places) {
     var bounds = new google.maps.LatLngBounds();
     var points = places.length;
-    if (points < 5) {
+    if (points < 6) {
       alert("Only "+(points-1)+" points of interest found");
       labelindex=0;
     }else {
-      points = 5;
+      points = 6;
     };
     for (var i = 1; i < points; i++) {
       var place = places[i];
