@@ -67,12 +67,12 @@ var myViewModel = function() {
     var bounds = new google.maps.LatLngBounds();
     var points = places.length;
     if (points < 5) {
-      alert("Only "+points+" points of interest found");
+      alert("Only "+(points-1)+" points of interest found");
       labelindex=0;
     }else {
       points = 5;
     };
-    for (var i = 1; i < (points+1); i++) {
+    for (var i = 1; i < points; i++) {
       var place = places[i];
       self.markerslist.push({title:place.name,id:i});
       self.filterlist.push({title:place.name,id:i});
