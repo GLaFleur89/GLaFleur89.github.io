@@ -68,8 +68,10 @@ var myViewModel = function() {
     if (points < 5) {
       alert("Only "+points+" points of interest found");
       labelindex=0;
+    }else {
+      points = 5;
     };
-    for (var i = 1; i < 6; i++) {
+    for (var i = 1; i < (points+1); i++) {
       var place = places[i];
       self.markerslist.push({title:place.name,id:i});
       self.filterlist.push({title:place.name,id:i});
