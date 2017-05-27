@@ -6,11 +6,14 @@ function initMap() {
 var myViewModel = function() {
   this.markerslist = ko.observableArray();
   this.headingList = ko.observable(false);
+  this.selectedPlace = ko.observable('Base');
+  this.filterlist = ko.observableArray();
   var self = this;
   var map;
   var markers = [];
   var labels="123456789";
   var labelindex = 0;
+
 
   this.sethome = function () {
     var home = document.getElementById("home").value;
@@ -21,7 +24,6 @@ var myViewModel = function() {
       self.markerslist.removeAll();
       self.headingList(true);
       geocodeAddress(geocoder);
-
       }
   };
 
@@ -65,10 +67,12 @@ var myViewModel = function() {
     var points = places.length;
     if (points < 5) {
       alert("Only "+points+" points of interest found");
+      labelindex=0;
     };
     for (var i = 1; i < 6; i++) {
       var place = places[i];
       self.markerslist.push({title:place.name,id:i});
+      self.filterlist.push({title:place.name,id:i});
       var icon = {
         url: place.icon,
         size: new google.maps.Size(35, 35),
@@ -93,8 +97,23 @@ var myViewModel = function() {
       labelindex=0;
   }
 
-  function filter() {
-    var input = document.getElementById("home").value
-  }
+this.filter = function () {
+  var filterChoice = self.selectedPlace();
+  self.markerslist.removeAll();
+  for (var i = 0 ; i < markers.length ; i++) {
+    if (filterChoice == markers[i].title) {
+      markers[i].setVisible(true);
+      self.markerslist.push({title:markers[i].title,id:i});
+    }else {
+      if (filterChoice == null) {
+        self.markerslist.push({title:markers[i].title,id:i});
+        markers[i].setVisible(true);
+      }else {
+      markers[i].setVisible(false);
+    }}
+  };
+};
+
+
 
 }

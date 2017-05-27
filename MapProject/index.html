@@ -29,9 +29,7 @@
       </div>
       <div class=filter data-bind="visible: headingList">
           <h2>Filter:</h2>
-          <select data-bind="foreach: markerslist">
-            <option data-bind="text: $data.title"></option>
-          </select>
+          <select data-bind="options: filterlist,optionsValue: 'title',value: selectedPlace, optionsCaption: 'Filter Markers...',event : {change:filter}"></select>
       </div>
     </div>
     <script>ko.applyBindings(myViewModel());</script>
