@@ -6,11 +6,12 @@ function initMap() {
 var myViewModel = function() {
   this.markerslist = ko.observableArray();
   this.headingList = ko.observable(false);
-  this.selectedPlace = ko.observable('Base');
+  this.selectedPlace = ko.observable();
   this.filterlist = ko.observableArray();
   var self = this;
   var map;
   var markers = [];
+  var clickedmarker = [];
   var labels="123456789";
   var labelindex = 0;
 
@@ -77,7 +78,7 @@ var myViewModel = function() {
       self.markerslist.push({title:place.name,id:i});
       self.filterlist.push({title:place.name,id:i});
       var icon = {
-        url: place.icon,
+        url: 'http://maps.google.com/mapfiles/ms/micons/red-pushpin.png',
         size: new google.maps.Size(35, 35),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(15, 34),
@@ -85,6 +86,7 @@ var myViewModel = function() {
       };
       // Create a marker for each place.
       var marker = new google.maps.Marker({
+        icon:icon,
         map: map,
         title: place.name,
         position: place.geometry.location,
@@ -93,9 +95,16 @@ var myViewModel = function() {
         label: labels[labelindex++]
       });
       // If a marker is clicked, do a place details search on it in the next function.
-      marker.addListener('click', function() {
-      getPlacesDetails(this, place);
-      });
+      marker.addListener('click', function(holder) {
+                  return function() {
+                    if (holder.getAnimation() !== null) {
+                  holder.setAnimation(null);
+                } else {
+                  holder.setAnimation(google.maps.Animation.BOUNCE);
+                }
+          }
+        }(marker));
+
       markers.push(marker);
     }
       labelindex=0;
@@ -118,6 +127,12 @@ this.filter = function () {
   };
 };
 
-
+this.animateicons = function (clickedPlace) {
+      for (i=0; i<markers.length; i++) {
+        if (markers[i].title == clickedPlace.title) {
+          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+        } else {markers[i].setAnimation(null);
+      }
+}};
 
 }

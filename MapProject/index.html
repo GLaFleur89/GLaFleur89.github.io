@@ -23,7 +23,7 @@
         <h2 data-bind="visible: headingList">Places Of Interest</h2>
         <ul class=markerlist data-bind="foreach: markerslist">
           <li>
-            <span data-bind="text: $data.title"></span>
+            <span data-bind="text: $data.title,  event: {click:animateicons}"></span>
           </li>
         </ul>
       </div>
