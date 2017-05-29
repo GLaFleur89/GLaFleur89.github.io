@@ -96,17 +96,7 @@ var myViewModel = function() {
       });
       // If a marker is clicked, do a place details search on it in the next function.
       marker.addListener('click', function(holder) {
-
-                self.animateicons(this);}
-
-//                  return function() {
-//                    if (holder.getAnimation() !== null) {
-//                  holder.setAnimation(null);
-//                } else {
-//                  holder.setAnimation(google.maps.Animation.BOUNCE);
-//                }
-//          }
-//        }(marker)
+        self.animateicons(this);}
 );
 
       markers.push(marker);
@@ -144,6 +134,7 @@ this.animateicons = function (clickedPlace) {
           toggleAnimation();
         } else {markers[i].setAnimation(null);
       }
-}};
-
+}
+  
+};
 }
