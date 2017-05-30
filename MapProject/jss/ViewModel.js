@@ -8,12 +8,15 @@ var myViewModel = function() {
   this.headingList = ko.observable(false);
   this.selectedPlace = ko.observable();
   this.filterlist = ko.observableArray();
+
+  var info="";
   var self = this;
   var map;
   var markers = [];
   var clickedmarker = [];
   var labels="123456789";
   var labelindex = 0;
+
 
 
   this.sethome = function () {
@@ -52,6 +55,7 @@ var myViewModel = function() {
       location: base,
       radius: 500
     }, function(results, status) {
+      console.log(results);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         createMarkers(results);
       }else {
@@ -94,9 +98,15 @@ var myViewModel = function() {
         animation: google.maps.Animation.DROP,
         label: labels[labelindex++]
       });
+      // create infowindow
+    //  var infowindow = new google.maps.InfoWindow({
+    //    content: "<div>"+place.name+"</div>"
+    //  });
       // If a marker is clicked, do a place details search on it in the next function.
       marker.addListener('click', function(holder) {
-        self.animateicons(this);}
+        self.animateicons(this);
+      //  infowindow.open(map,this);
+    }
 );
 
       markers.push(marker);
@@ -129,12 +139,58 @@ function toggleAnimation() {
 }
 
 this.animateicons = function (clickedPlace) {
+  // create infowindow
+  var infowindow = new google.maps.InfoWindow({
+    content: "<div>"+clickedPlace.title+"</div>"
+  });
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
           toggleAnimation();
-        } else {markers[i].setAnimation(null);
+          infowindow.open(map,markers[i]);
+          //detailsWeather(clickedPlace.title);
+        } else {
+          markers[i].setAnimation(null);
       }
 }
-  
+
 };
+
+function detailsWeather(title) {
+  $.ajax({
+    url:"http://autocomplete.wunderground.com/aq?",
+    data: {
+      query: title
+    },
+    type: "get",
+    dataType: "jsonp"
+  })
+  .done(function(result){
+    // add function for info window
+    console.log(result);
+      })
+  .fail(function( xhr, status, errorThrown ) {
+    alert(errorThrown);
+  });
+}
+
+function detailsWiki(title) {
+  $.ajax({
+    url:"https://en.wikipedia.org/w/api.php?action=query",
+    data: {
+      titles: title,
+      prop: "info",
+      rvprop: "content",
+      format: "json"
+    },
+    type: "get",
+    dataType: "jsonp"
+  })
+  .done(function(result){
+    // add function for info window
+    console.log(result);
+      })
+  .fail(function( xhr, status, errorThrown ) {
+    alert(errorThrown);
+  });
+}
 }

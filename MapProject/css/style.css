@@ -5,9 +5,11 @@ html, body {
 
 .place-input {
   height: 3.5%;
-  width: 20%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+}
+
+#home {
+  margin-left: 40%;
 }
 
 #map {
