@@ -12,12 +12,11 @@ var myViewModel = function() {
   var info="";
   var self = this;
   var map;
+  var infowindow;
   var markers = [];
   var clickedmarker = [];
   var labels="123456789";
   var labelindex = 0;
-
-
 
   this.sethome = function () {
     var home = document.getElementById("home").value;
@@ -55,9 +54,9 @@ var myViewModel = function() {
       location: base,
       radius: 500
     }, function(results, status) {
-      console.log(results);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         createMarkers(results);
+        infowindow = new google.maps.InfoWindow();
       }else {
         alert('Markers was not successful for the following reason: ' + status);
       }});
@@ -94,21 +93,16 @@ var myViewModel = function() {
         map: map,
         title: place.name,
         position: place.geometry.location,
-        id: place.id,
+        id: place.place_id,
         animation: google.maps.Animation.DROP,
-        label: labels[labelindex++]
+        label: labels[labelindex++],
+        rating: place.rating,
+        address: place.vicinity
       });
-      // create infowindow
-    //  var infowindow = new google.maps.InfoWindow({
-    //    content: "<div>"+place.name+"</div>"
-    //  });
-      // If a marker is clicked, do a place details search on it in the next function.
+
       marker.addListener('click', function(holder) {
         self.animateicons(this);
-      //  infowindow.open(map,this);
-    }
-);
-
+    });
       markers.push(marker);
     }
       labelindex=0;
@@ -139,21 +133,15 @@ function toggleAnimation() {
 }
 
 this.animateicons = function (clickedPlace) {
-  // create infowindow
-  var infowindow = new google.maps.InfoWindow({
-    content: "<div>"+clickedPlace.title+"</div>"
-  });
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
           toggleAnimation();
+          infowindow.setContent("<h3>"+markers[i].title+"</h3><div>"+markers[i].address+"</div><div>Google Rating:"+markers[i].rating+"</div>");
           infowindow.open(map,markers[i]);
-          //detailsWeather(clickedPlace.title);
         } else {
           markers[i].setAnimation(null);
-      }
-}
-
-};
+      }}
+    };
 
 function detailsWeather(title) {
   $.ajax({
@@ -162,7 +150,7 @@ function detailsWeather(title) {
       query: title
     },
     type: "get",
-    dataType: "jsonp"
+    dataType: "json"
   })
   .done(function(result){
     // add function for info window
@@ -173,24 +161,4 @@ function detailsWeather(title) {
   });
 }
 
-function detailsWiki(title) {
-  $.ajax({
-    url:"https://en.wikipedia.org/w/api.php?action=query",
-    data: {
-      titles: title,
-      prop: "info",
-      rvprop: "content",
-      format: "json"
-    },
-    type: "get",
-    dataType: "jsonp"
-  })
-  .done(function(result){
-    // add function for info window
-    console.log(result);
-      })
-  .fail(function( xhr, status, errorThrown ) {
-    alert(errorThrown);
-  });
-}
 }
