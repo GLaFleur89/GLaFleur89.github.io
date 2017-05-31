@@ -1,8 +1,10 @@
+//  Is callback function from loading google apis. Adds autocomplete for input box.
 function initMap() {
   var input = document.getElementById("home");
   var autocomplete = new google.maps.places.Autocomplete(input);
 };
 
+// Creates KO ViewModel as well as setting all the variables needed for the below functions.
 var myViewModel = function() {
   this.markerslist = ko.observableArray();
   this.headingList = ko.observable(false);
@@ -19,6 +21,8 @@ var myViewModel = function() {
   var labels="123456789";
   var labelindex = 0;
 
+//Main function that determines location from geocode api
+//and resets all markers and filters when new location chosen.
   this.sethome = function () {
     var home = document.getElementById("home").value;
     var geocoder = new google.maps.Geocoder();
@@ -32,13 +36,15 @@ var myViewModel = function() {
       }
   };
 
+//Determines location of  map using geocode result to determine the maps center.
+//initialises searchPLaces function to get data for map.
   function geocodeAddress(geocoder) {
     var address = document.getElementById("home").value;
     geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {
     var baselatlong =(results[0].geometry.location);
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15
+      zoom: 14
     });
     map.setCenter(results[0].geometry.location);
     searchplaces(results[0].geometry.location);
@@ -47,6 +53,7 @@ var myViewModel = function() {
     }})
   };
 
+//Places api search for data about location chosen and creates markers for the map.
   function searchplaces(base) {
     hidemarkers(markers);
     var bounds = map.getBounds();
@@ -63,11 +70,16 @@ var myViewModel = function() {
       }});
   };
 
+
   function hidemarkers(marker) {
     for (i=0; i<marker.length; i++) {
       markers[i].setMap(null);}
   }
 
+//creates the markers using details from places API search.
+//limits markers to no more than 5.
+//pushes markers into an observable KO array and
+//adds click event to markers for animation.
   function createMarkers(places) {
     var bounds = new google.maps.LatLngBounds();
     var points = places.length;
@@ -105,10 +117,12 @@ var myViewModel = function() {
         self.animateicons(this);
     });
       markers.push(marker);
-    }
+    };
       labelindex=0;
-  }
+  };
 
+//filter function that runs when filter input selected.
+//makes only selected locations marker visible.
 this.filter = function () {
   var filterChoice = self.selectedPlace();
   self.markerslist.removeAll();
@@ -126,13 +140,8 @@ this.filter = function () {
   };
 };
 
-function toggleAnimation() {
-  if(markers[i].getAnimation() !== null) {
-    markers[i].setAnimation(null);} else {
-      markers[i].setAnimation(google.maps.Animation.BOUNCE);
-    }
-}
-
+//This is the function that runs when the markers or list is clicked.
+//It also creates and displays the info windows when locations clicked
 this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
@@ -145,6 +154,16 @@ this.animateicons = function (clickedPlace) {
       }}
     };
 
+    //toggles the animation of the markers so that the bouncing can be stopped by clicking on the marker again.
+    function toggleAnimation() {
+      if(markers[i].getAnimation() !== null) {
+        markers[i].setAnimation(null);} else {
+          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+    };
+
+//This is the ajax request for the foursquare API.
+//This function also sets the content for the Info Windows.
 function detailsFS(place,title,address,rating) {
 venues = [];
   $.ajax({
@@ -170,6 +189,5 @@ venues = [];
   .fail(function( xhr, status, errorThrown ) {
     alert(errorThrown);
   });
-}
-
+};
 }
