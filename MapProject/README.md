@@ -1,6 +1,6 @@
 #### Neighborhood Map Project
 
-###How it Works:<br>
+### How it Works:<br>
 1.) Open index.html in any browser<br>
 2.) Input your neighborhood in the input box on the top pf the page.<br>
 3.) Click the submit button.<br>
