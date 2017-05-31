@@ -1,4 +1,4 @@
-#### Neighborhood Map Project
+## Neighborhood Map Project
 
 ### How it Works:<br>
 1.) Open index.html in any browser<br>
