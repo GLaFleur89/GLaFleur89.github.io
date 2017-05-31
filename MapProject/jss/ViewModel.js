@@ -13,6 +13,8 @@ var myViewModel = function() {
   var self = this;
   var map;
   var infowindow;
+  var ll;
+  var FSdata = [];
   var markers = [];
   var clickedmarker = [];
   var labels="123456789";
@@ -135,8 +137,12 @@ function toggleAnimation() {
 this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
+          ll = markers[i].position.lat()+","+markers[i].position.lng();
           toggleAnimation();
-          infowindow.setContent("<h3>"+markers[i].title+"</h3><div>"+markers[i].address+"</div><div>Google Rating:"+markers[i].rating+"</div>");
+          detailsFS(ll);
+        console.log(FSdata);
+        console.log(FSdata[0]);
+          infowindow.setContent("<div><h3>"+markers[i].title+"</h3>"+markers[i].address+"</div><div>Google Rating:"+markers[i].rating+"</div><div><h4>Stats from FourSquare:</h4>Check-ins: "+FSdata.checkinsCount+"<br>No. Users: "+FSdata.usersCount+"<br>No. Tips: "+FSdata.tipCount+"</div>");
           infowindow.open(map,markers[i]);
         } else {
           markers[i].setAnimation(null);
@@ -155,6 +161,33 @@ function detailsWeather(title) {
   .done(function(result){
     // add function for info window
     console.log(result);
+      })
+  .fail(function( xhr, status, errorThrown ) {
+    alert(errorThrown);
+  });
+};
+
+function detailsFS(place) {
+  FSdata = [];
+  $.ajax({
+    url:"https://api.foursquare.com/v2/venues/search?",
+    data: {
+      ll: place,
+      limit: 1,
+      oauth_token: "2QL42Q4O35Z1JOOMMVZIZ3AX3JHQ52FMYFPHWXCTATUTCEN2",
+      v: 20170601,
+      m: 'foursquare'
+    },
+    type: "get",
+    dataType: "jsonP"
+  })
+  .done(function(result){
+    if (result.meta.code == 200) {
+      var stats= result.response.venues[0].stats;
+      FSdata.push(stats);
+    } else {
+      alert(result.meta.errorDetail);
+    }
       })
   .fail(function( xhr, status, errorThrown ) {
     alert(errorThrown);
