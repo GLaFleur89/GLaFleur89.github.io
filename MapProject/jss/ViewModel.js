@@ -14,7 +14,6 @@ var myViewModel = function() {
   var map;
   var infowindow;
   var ll;
-  var FSdata = [];
   var markers = [];
   var clickedmarker = [];
   var labels="123456789";
@@ -139,36 +138,15 @@ this.animateicons = function (clickedPlace) {
         if (markers[i].title == clickedPlace.title) {
           ll = markers[i].position.lat()+","+markers[i].position.lng();
           toggleAnimation();
-          detailsFS(ll);
-        console.log(FSdata);
-        console.log(FSdata[0]);
-          infowindow.setContent("<div><h3>"+markers[i].title+"</h3>"+markers[i].address+"</div><div>Google Rating:"+markers[i].rating+"</div><div><h4>Stats from FourSquare:</h4>Check-ins: "+FSdata.checkinsCount+"<br>No. Users: "+FSdata.usersCount+"<br>No. Tips: "+FSdata.tipCount+"</div>");
+          detailsFS(ll,markers[i].title,markers[i].address,markers[i].rating);
           infowindow.open(map,markers[i]);
         } else {
           markers[i].setAnimation(null);
       }}
     };
 
-function detailsWeather(title) {
-  $.ajax({
-    url:"http://autocomplete.wunderground.com/aq?",
-    data: {
-      query: title
-    },
-    type: "get",
-    dataType: "json"
-  })
-  .done(function(result){
-    // add function for info window
-    console.log(result);
-      })
-  .fail(function( xhr, status, errorThrown ) {
-    alert(errorThrown);
-  });
-};
-
-function detailsFS(place) {
-  FSdata = [];
+function detailsFS(place,title,address,rating) {
+venues = [];
   $.ajax({
     url:"https://api.foursquare.com/v2/venues/search?",
     data: {
@@ -183,8 +161,8 @@ function detailsFS(place) {
   })
   .done(function(result){
     if (result.meta.code == 200) {
-      var stats= result.response.venues[0].stats;
-      FSdata.push(stats);
+    var  a = result.response.venues["0"].stats;
+    infowindow.setContent("<div><h3>"+title+"</h3>"+address+"</div><div>Google Rating:"+rating+"</div><div><h4>Closest FourSquare location: "+result.response.venues["0"].name+"</h4>Check-ins: "+a.checkinsCount+"<br>No. Users: "+a.usersCount+"<br>No. Tips: "+a.tipCount+"</div>");
     } else {
       alert(result.meta.errorDetail);
     }
