@@ -3,11 +3,11 @@
 function initMap() {
   var input = document.getElementById("home");
   var autocomplete = new google.maps.places.Autocomplete(input);
-};
+}
 
 //alet window for failure to run google script.
 function mapError() {
-  alert("Failed to run google maps script")
+  alert("Failed to run google maps script");
 }
 
 // Creates KO ViewModel as well as setting all the variables needed for the below functions.
@@ -18,13 +18,11 @@ var myViewModel = function() {
   this.filterlist = ko.observableArray();
   this.home = ko.observable();
 
-  var info="";
   var self = this;
   var map;
   var infowindow;
   var ll;
   var markers = [];
-  var clickedmarker = [];
   var labels="123456789";
   var labelindex = 0;
 
@@ -33,7 +31,7 @@ var myViewModel = function() {
   this.sethome = function () {
     self.home = document.getElementById("home").value;
     var geocoder = new google.maps.Geocoder();
-    if (self.home == "") {
+    if (self.home === "") {
       alert("No location selected!");
     } else {
       markers.length = 0;
@@ -41,8 +39,8 @@ var myViewModel = function() {
       self.filterlist.removeAll();
       self.headingList(true);
       geocodeAddress(geocoder);
-    };
-  }
+    }
+  };
 
 //Determines location of  map using geocode result to determine the maps center.
 //initialises searchPLaces function to get data for map.
@@ -75,7 +73,7 @@ var myViewModel = function() {
       }else {
         alert('Markers was not successful for the following reason: ' + status);
       }});
-  };
+  }
 
 
   function hidemarkers(marker) {
@@ -95,7 +93,7 @@ var myViewModel = function() {
       labelindex=0;
     }else {
       points = 6;
-    };
+    }
     for (var i = 1; i < points; i++) {
       var place = places[i];
       self.markerslist.push({title:place.name,id:i});
@@ -124,9 +122,9 @@ var myViewModel = function() {
         self.animateicons(this);
     });
       markers.push(marker);
-    };
+    }
       labelindex=0;
-  };
+  }
 
 //filter function that runs when filter input selected.
 //makes only selected locations marker visible.
@@ -139,13 +137,13 @@ this.filter = function () {
       markers[i].setVisible(true);
       self.markerslist.push({title:markers[i].title,id:i});
     }else {
-      if (filterChoice == null) {
+      if (filterChoice === undefined) {
         self.markerslist.push({title:markers[i].title,id:i});
         markers[i].setVisible(true);
       }else {
       markers[i].setVisible(false);
     }}
-  };
+  }
 };
 
 //This is the function that runs when the markers or list is clicked.
@@ -183,24 +181,24 @@ function detailsFS(place,title,address,rating) {
   .done(function(result){
     if (result.meta.code == 200) {
     var  a = result.response.venues["0"].stats;
-    if(title == undefined) {
-      title = "No Title Available"
-    };
-    if(address == undefined) {
-      address = "No Address Available"
-    };
-    if(rating == undefined) {
-      rating = "No Rating Available"
-    };
-    if(a.checkinsCount == undefined) {
-      a.checkinsCount = "Stat Unavailable"
-    };
-    if(a.usersCount == undefined) {
-      a.usersCount = "Stat Unavailable"
-    };
-    if(a.tipCount == undefined) {
-      a.tipCount = "Stat Unavailable"
-    };
+    if(title === undefined) {
+      title = "No Title Available";
+    }
+    if(address === undefined) {
+      address = "No Address Available";
+    }
+    if(rating === undefined) {
+      rating = "No Rating Available";
+    }
+    if(a.checkinsCount === undefined) {
+      a.checkinsCount = "Stat Unavailable";
+    }
+    if(a.usersCount === undefined) {
+      a.usersCount = "Stat Unavailable";
+    }
+    if(a.tipCount === undefined) {
+      a.tipCount = "Stat Unavailable";
+    }
     infowindow.setContent("<div><h3>"+title+"</h3>"+address+"</div><div>Google Rating: "+rating+"</div><div><h4>Closest FourSquare location: "+result.response.venues["0"].name+"</h4>Check-ins: "+a.checkinsCount+"<br>No. Users: "+a.usersCount+"<br>No. Tips: "+a.tipCount+"</div>");
     } else {
       alert(result.meta.errorDetail);
@@ -209,5 +207,5 @@ function detailsFS(place,title,address,rating) {
   .fail(function( xhr, status, errorThrown ) {
     alert(errorThrown);
   });
-};
 }
+};
