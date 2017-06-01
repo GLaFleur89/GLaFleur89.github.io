@@ -1,8 +1,14 @@
+'use strict';
 //  Is callback function from loading google apis. Adds autocomplete for input box.
 function initMap() {
   var input = document.getElementById("home");
   var autocomplete = new google.maps.places.Autocomplete(input);
 };
+
+//alet window for failure to run google script.
+function mapError() {
+  alert("Failed to run google maps script")
+}
 
 // Creates KO ViewModel as well as setting all the variables needed for the below functions.
 var myViewModel = function() {
@@ -10,6 +16,7 @@ var myViewModel = function() {
   this.headingList = ko.observable(false);
   this.selectedPlace = ko.observable();
   this.filterlist = ko.observableArray();
+  this.home = ko.observable();
 
   var info="";
   var self = this;
@@ -24,9 +31,9 @@ var myViewModel = function() {
 //Main function that determines location from geocode api
 //and resets all markers and filters when new location chosen.
   this.sethome = function () {
-    var home = document.getElementById("home").value;
+    self.home = document.getElementById("home").value;
     var geocoder = new google.maps.Geocoder();
-    if (home == "") {
+    if (self.home == "") {
       alert("No location selected!");
     } else {
       markers.length = 0;
@@ -34,14 +41,13 @@ var myViewModel = function() {
       self.filterlist.removeAll();
       self.headingList(true);
       geocodeAddress(geocoder);
-      }
-  };
+    };
+  }
 
 //Determines location of  map using geocode result to determine the maps center.
 //initialises searchPLaces function to get data for map.
   function geocodeAddress(geocoder) {
-    var address = document.getElementById("home").value;
-    geocoder.geocode({'address': address}, function(results, status) {
+    geocoder.geocode({'address': self.home}, function(results, status) {
     if (status === 'OK') {
     var baselatlong =(results[0].geometry.location);
     map = new google.maps.Map(document.getElementById('map'), {
@@ -51,8 +57,8 @@ var myViewModel = function() {
     searchplaces(results[0].geometry.location);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
-    }})
-  };
+    }});
+  }
 
 //Places api search for data about location chosen and creates markers for the map.
   function searchplaces(base) {
@@ -73,7 +79,7 @@ var myViewModel = function() {
 
 
   function hidemarkers(marker) {
-    for (i=0; i<marker.length; i++) {
+    for (var i=0 ; i<marker.length ; i++) {
       markers[i].setMap(null);}
   }
 
@@ -128,6 +134,7 @@ this.filter = function () {
   var filterChoice = self.selectedPlace();
   self.markerslist.removeAll();
   for (var i = 0 ; i < markers.length ; i++) {
+    infowindow.close(map,markers[i]);
     if (filterChoice == markers[i].title) {
       markers[i].setVisible(true);
       self.markerslist.push({title:markers[i].title,id:i});
@@ -143,28 +150,24 @@ this.filter = function () {
 
 //This is the function that runs when the markers or list is clicked.
 //It also creates and displays the info windows when locations clicked
-this.animateicons = function (clickedPlace) {
-      for (i=0; i<markers.length; i++) {
+self.animateicons = function (clickedPlace) {
+      for (var i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
-          ll = markers[i].position.lat()+","+markers[i].position.lng();
+          var a = i;
           markers[i].setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(toggleAnimation(),7000);
+          setTimeout(function() {
+                      markers[a].setAnimation(null);
+                    }, 2000);
+          ll = markers[i].position.lat()+","+markers[i].position.lng();
           detailsFS(ll,markers[i].title,markers[i].address,markers[i].rating);
           infowindow.open(map,markers[i]);
         } else {
           markers[i].setAnimation(null);
       }}
     };
-
-    //toggles the animation of the markers so that the bouncing can be stopped by clicking on the marker again.
-    function toggleAnimation() {
-            markers[i].setAnimation(null);
-        };
-
 //This is the ajax request for the foursquare API.
 //This function also sets the content for the Info Windows.
 function detailsFS(place,title,address,rating) {
-venues = [];
   $.ajax({
     url:"https://api.foursquare.com/v2/venues/search?",
     data: {
@@ -180,7 +183,25 @@ venues = [];
   .done(function(result){
     if (result.meta.code == 200) {
     var  a = result.response.venues["0"].stats;
-    infowindow.setContent("<div><h3>"+title+"</h3>"+address+"</div><div>Google Rating:"+rating+"</div><div><h4>Closest FourSquare location: "+result.response.venues["0"].name+"</h4>Check-ins: "+a.checkinsCount+"<br>No. Users: "+a.usersCount+"<br>No. Tips: "+a.tipCount+"</div>");
+    if(title == undefined) {
+      title = "No Title Available"
+    };
+    if(address == undefined) {
+      address = "No Address Available"
+    };
+    if(rating == undefined) {
+      rating = "No Rating Available"
+    };
+    if(a.checkinsCount == undefined) {
+      a.checkinsCount = "Stat Unavailable"
+    };
+    if(a.usersCount == undefined) {
+      a.usersCount = "Stat Unavailable"
+    };
+    if(a.tipCount == undefined) {
+      a.tipCount = "Stat Unavailable"
+    };
+    infowindow.setContent("<div><h3>"+title+"</h3>"+address+"</div><div>Google Rating: "+rating+"</div><div><h4>Closest FourSquare location: "+result.response.venues["0"].name+"</h4>Check-ins: "+a.checkinsCount+"<br>No. Users: "+a.usersCount+"<br>No. Tips: "+a.tipCount+"</div>");
     } else {
       alert(result.meta.errorDetail);
     }
