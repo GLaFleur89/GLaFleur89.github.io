@@ -21,8 +21,8 @@ var myViewModel = function() {
   var labels="123456789";
   var labelindex = 0;
 
-//Main function that determines location from geocode api
-//and resets all markers and filters when new location chosen.
+/*Main function that determines location from geocode api
+and resets all markers and filters when new location chosen.*/
   this.sethome = function () {
     var home = document.getElementById("home").value;
     var geocoder = new google.maps.Geocoder();
@@ -37,8 +37,8 @@ var myViewModel = function() {
       }
   };
 
-//Determines location of  map using geocode result to determine the maps center.
-//initialises searchPLaces function to get data for map.
+/*Determines location of  map using geocode result to determine the maps center.
+initialises searchPLaces function to get data for map.*/
   function geocodeAddress(geocoder) {
     var address = document.getElementById("home").value;
     geocoder.geocode({'address': address}, function(results, status) {
@@ -77,10 +77,10 @@ var myViewModel = function() {
       markers[i].setMap(null);}
   }
 
-//creates the markers using details from places API search.
-//limits markers to no more than 5.
-//pushes markers into an observable KO array and
-//adds click event to markers for animation.
+/*creates the markers using details from places API search.
+limits markers to no more than 5.
+pushes markers into an observable KO array and
+adds click event to markers for animation.*/
   function createMarkers(places) {
     var bounds = new google.maps.LatLngBounds();
     var points = places.length;
@@ -122,8 +122,8 @@ var myViewModel = function() {
       labelindex=0;
   };
 
-//filter function that runs when filter input selected.
-//makes only selected locations marker visible.
+/*filter function that runs when filter input selected.
+makes only selected locations marker visible.*/
 this.filter = function () {
   var filterChoice = self.selectedPlace();
   self.markerslist.removeAll();
@@ -141,8 +141,8 @@ this.filter = function () {
   };
 };
 
-//This is the function that runs when the markers or list is clicked.
-//It also creates and displays the info windows when locations clicked
+/*This is the function that runs when the markers or list is clicked.
+It also creates and displays the info windows when locations clicked*/
 this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
@@ -161,8 +161,8 @@ this.animateicons = function (clickedPlace) {
             markers[i].setAnimation(null);
         };
 
-//This is the ajax request for the foursquare API.
-//This function also sets the content for the Info Windows.
+/*This is the ajax request for the foursquare API.
+This function also sets the content for the Info Windows.*/
 function detailsFS(place,title,address,rating) {
 venues = [];
   $.ajax({
