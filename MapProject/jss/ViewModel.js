@@ -29,6 +29,7 @@ var myViewModel = function() {
     if (home == "") {
       alert("No location selected!");
     } else {
+      markers.length = 0;
       self.markerslist.removeAll();
       self.filterlist.removeAll();
       self.headingList(true);
@@ -146,7 +147,8 @@ this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
         if (markers[i].title == clickedPlace.title) {
           ll = markers[i].position.lat()+","+markers[i].position.lng();
-          toggleAnimation();
+          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(toggleAnimation(),7000);
           detailsFS(ll,markers[i].title,markers[i].address,markers[i].rating);
           infowindow.open(map,markers[i]);
         } else {
@@ -156,11 +158,8 @@ this.animateicons = function (clickedPlace) {
 
     //toggles the animation of the markers so that the bouncing can be stopped by clicking on the marker again.
     function toggleAnimation() {
-      if(markers[i].getAnimation() !== null) {
-        markers[i].setAnimation(null);} else {
-          markers[i].setAnimation(google.maps.Animation.BOUNCE);
-        }
-    };
+            markers[i].setAnimation(null);
+        };
 
 //This is the ajax request for the foursquare API.
 //This function also sets the content for the Info Windows.
