@@ -4,13 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="jquery-3.2.1.min.js"></script>
-    <script type='text/javascript' src='knockout-3.4.2.js'></script>
-  <!--  <script src="jss/app.js"></script> -->
-    <script src="jss/ViewModel.js"></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPeoFs5eZwnLZs8MlDYb6Ys_LT9MAJt4I&libraries=places&callback=initMap"
-    async defer></script>
     <title>Neighbourhood Map</title>
   </head>
   <body>
@@ -18,13 +11,13 @@
       <input type="text" name="home" id="home" placeholder="Enter base location here">
       <button type="button" id="homebutton" data-bind="click: sethome">Submit</button>
     </div>
-    <div id="map"></div>
+    <div id="map" class="map"></div>
     <div class="map-sidebar">
       <div class=list>
         <h2 data-bind="visible: headingList">Places Of Interest</h2>
         <ul class=markerlist data-bind="foreach: markerslist">
           <li>
-            <span data-bind="text: $data.title,  event: {click:animateicons}"></span>
+            <span data-bind="text: $data.title,  click:$root.animateicons"></span>
           </li>
         </ul>
       </div>
@@ -33,7 +26,11 @@
           <select data-bind="options: filterlist,optionsValue: 'title',value: selectedPlace, optionsCaption: 'Filter Markers...',event : {change:filter}"></select>
       </div>
     </div>
-    <script>ko.applyBindings(myViewModel());</script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src='knockout-3.4.2.js'></script>
+    <script src="jss/ViewModel.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPeoFs5eZwnLZs8MlDYb6Ys_LT9MAJt4I&libraries=places&callback=initMap" onerror="mapError()"
+    async defer></script>
+    <script>ko.applyBindings( new myViewModel());</script>
   </body>
-  <script> </script>
 </html>
