@@ -146,17 +146,11 @@ this.filter = function () {
   }
 };
 
-<<<<<<< HEAD
+
 /*This is the function that runs when the markers or list is clicked.
 It also creates and displays the info windows when locations clicked*/
 this.animateicons = function (clickedPlace) {
       for (i=0; i<markers.length; i++) {
-=======
-//This is the function that runs when the markers or list is clicked.
-//It also creates and displays the info windows when locations clicked
-self.animateicons = function (clickedPlace) {
-      for (var i=0; i<markers.length; i++) {
->>>>>>> e497c1d369605754efc4c95bde1047649e60f514
         if (markers[i].title == clickedPlace.title) {
           var a = i;
           markers[i].setAnimation(google.maps.Animation.BOUNCE);
@@ -170,7 +164,6 @@ self.animateicons = function (clickedPlace) {
           markers[i].setAnimation(null);
       }}
     };
-<<<<<<< HEAD
 
     //toggles the animation of the markers so that the bouncing can be stopped by clicking on the marker again.
     function toggleAnimation() {
@@ -179,10 +172,7 @@ self.animateicons = function (clickedPlace) {
 
 /*This is the ajax request for the foursquare API.
 This function also sets the content for the Info Windows.*/
-=======
-//This is the ajax request for the foursquare API.
-//This function also sets the content for the Info Windows.
->>>>>>> e497c1d369605754efc4c95bde1047649e60f514
+
 function detailsFS(place,title,address,rating) {
   $.ajax({
     url:"https://api.foursquare.com/v2/venues/search?",
